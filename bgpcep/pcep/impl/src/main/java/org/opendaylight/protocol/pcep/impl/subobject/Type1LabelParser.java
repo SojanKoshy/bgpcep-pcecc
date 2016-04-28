@@ -27,7 +27,7 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.rsvp.rev
  */
 public class Type1LabelParser implements LabelParser, LabelSerializer {
 
-    public static final int CTYPE = 1;
+    public static final int CTYPE = 0;
 
     public static final int LABEL_LENGTH = 4;
 

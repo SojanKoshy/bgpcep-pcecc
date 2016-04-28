@@ -97,11 +97,13 @@ public abstract class AbstractMessageParser implements MessageParser, MessageSer
             final ObjectHeader header = new ObjectHeaderImpl(flags.get(PROCESSED), flags.get(IGNORED));
 
             if (VendorInformationUtil.isVendorInformationObject(objClass, objType)) {
-                Preconditions.checkState(this.viRegistry != null);
-                final EnterpriseNumber enterpriseNumber = new EnterpriseNumber(bytesToPass.readUnsignedInt());
-                final Optional<? extends Object> obj = this.viRegistry.parseVendorInformationObject(enterpriseNumber, header, bytesToPass);
-                if (obj.isPresent()) {
-                    objs.add(obj.get());
+                if (this.viRegistry != null) {
+                    Preconditions.checkState(this.viRegistry != null);
+                    final EnterpriseNumber enterpriseNumber = new EnterpriseNumber(bytesToPass.readUnsignedInt());
+                    final Optional<? extends Object> obj = this.viRegistry.parseVendorInformationObject(enterpriseNumber, header, bytesToPass);
+                    if (obj.isPresent()) {
+                        objs.add(obj.get());
+                    }
                 }
             } else {
                 // parseObject is required to return null for P=0 errored objects
